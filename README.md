@@ -7,8 +7,7 @@ Creates a complex MULTIPOLYGON as described by the options below then performs a
 node kdb-test.js [options]
 
 **Options**:\
-Use these options to describe the geometry used to filter the dataset
-
+Use these options to describe the data being filtered and the output format
 - **host**: ip addressand port of the gpudb host
 - **dataset**: the name of the dataset to be filtered
 - **column**: the name of the column in the dataset containing geometry
@@ -16,9 +15,11 @@ Use these options to describe the geometry used to filter the dataset
 - **showGeometry**: true to output wkt to console (default = false)
 - **showDetailedResults**: true to include individual test results in output (default = false)
 - **cycles**: number of test cycles to execute in the series (default = 1)
-- **x**,y: center of polygon (default x = -101, y = 32)
-- **cx**, cy: count of polygons in x,y matrix (default x = 1, y = 1)
-- **dx**, dy: distance x,y between polygons (default x = 1, y = 1)
+
+Use these options to describe the filter geometry
+- **x,y**: center of polygon (default x = -101, y = 32)
+- **cx,cy**: count of polygons in x,y matrix (default x = 1, y = 1)
+- **dx,dy**: distance x,y between polygons (default x = 1, y = 1)
 - **sides**: number of sides on polygon (default = 4)
 - **vertices**: number of vertices on polygon (default = 10)
 - **radius**: polygon radius (default = .25)

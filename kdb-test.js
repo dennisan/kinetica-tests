@@ -22,20 +22,20 @@ var password = process.env['KDB_PASS']
 
 // see args below for usage
 const {
-    host,                       // gpudb host (Required)
-    dataset='prism.pipeline_view',// table to filter
-    column='WKT',               // column in table that contains geometry
-    operation='ST_INTERSECTS',  // operation to perform
-    showGeometry=false,         // output wkt to console
-    showDetailedResults=false,  // include individual test results in output
-    cycles = 1,                 // number of test cycles to execute
-    x = -101, y = 32,           // x,y center of polygon
-    cx=1, cy=1,                 // count of polygons in x,y matrix
-    dx=1, dy=1,                 // distance x,y between polygons
-    sides=4,                    // number of sides on polygon
-    vertices=10,                // number of vertices on polygon
-    radius=.25,                 // polygon radius
-    smoothness=0.15             // polygon smoothness
+    host,                               // gpudb host (Required)
+    dataset='prism.pipeline_view',      // table to filter
+    column='WKT',                       // column in table that contains geometry
+    operation='ST_INTERSECTS',          // operation to perform
+    showGeometry=false,                 // output wkt to console
+    showDetailedResults=false,          // include individual test results in output
+    cycles = 1,                         // number of test cycles to execute
+    x = -101, y = 32,                   // x,y center of polygon
+    cx=1, cy=1,                         // count of polygons in x,y matrix
+    dx=1, dy=1,                         // distance x,y between polygons
+    sides=4,                            // number of sides on polygon
+    vertices=10,                        // number of vertices on polygon
+    radius=.25,                         // polygon radius
+    smoothness=0.15                     // polygon smoothness
 } = require('args-parser')(process.argv)
 
 const runTest = (dataset, column, operation, cycles, x, y, cx, cy, dx, dy, sides, vertices, radius, smoothness) => {
@@ -72,7 +72,7 @@ const runTest = (dataset, column, operation, cycles, x, y, cx, cy, dx, dy, sides
         if (showDetailedResults) {
             results.forEach(r => console.log(`Found ${r.count} records in ${r.request_time_secs} sec `))
         }
-        console.log(`host: ${host}, table: ${dataset_name}, operation: ${operation}, polygons: ${cx*cy} (${cx}x${cy}), vertices: ${vertices}, records: ${cntRecords}, cycles: ${results.length}, min: ${minRespTime}s, avg:${avgRespTime}s, max:${maxRespTime}s` );
+        console.log(`host: ${host}, table: ${dataset_name}, operation: ${operation}, polygons: ${cx*cy} (${cx}x${cy}), vertices: ${vertices}, radius: ${radius}, records found: ${cntRecords}, cycles: ${results.length}, min: ${minRespTime}s, avg:${avgRespTime}s, max:${maxRespTime}s` );
     })
     .catch((error)=> {
         console.error(error );
