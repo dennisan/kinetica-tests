@@ -23,6 +23,9 @@ var password = process.env['KDB_PASS']
 // see args below for usage
 const {
     host,                       // gpudb host (Required)
+    dataset='prism.pipeline_view',// table to filter
+    column='WKT',               // column in table that contains geometry
+    operation='ST_INTERSECTS',  // operation to perform
     showGeometry=false,         // output wkt to console
     showDetailedResults=false,  // include individual test results in output
     cycles = 1,                 // number of test cycles to execute
@@ -35,16 +38,15 @@ const {
     smoothness=0.15             // polygon smoothness
 } = require('args-parser')(process.argv)
 
-const runTest = (cycles, x, y, cx, cy, dx, dy, sides, vertices, radius, smoothness) => {
+const runTest = (dataset, column, operation, cycles, x, y, cx, cy, dx, dy, sides, vertices, radius, smoothness) => {
 
     let geometry = null
 
     // create geometry and setup query
     geometry = geo.multiToWKT(geo.makeMultiPolygon(x, y, cx, cy, dx, dy, sides, vertices, radius, smoothness))
 
-    const operation = `ST_INTERSECTS`
-    const expression = `ST_INTERSECTS('${geometry}', WKT)`
-    const table_name = 'prism.pipeline_view'
+    const expression = `${operation}('${geometry}', ${column})`
+    const dataset_name = dataset
 
     if (showGeometry) {
         console.log(`Polygons:${cx *cy}, vertices: ${vertices}, radius: ${radius}, smoothness: ${smoothness}\n`);
@@ -56,7 +58,7 @@ const runTest = (cycles, x, y, cx, cy, dx, dy, sides, vertices, radius, smoothne
 
     // run the tests
     result = [...Array(cycles).keys()].map(i =>
-        gpudb.filter( table_name, null /* view_name */, expression, null /* foptions */)
+        gpudb.filter( dataset_name, null /* view_name */, expression, null /* foptions */)
     )
 
     // capture the results
@@ -70,7 +72,7 @@ const runTest = (cycles, x, y, cx, cy, dx, dy, sides, vertices, radius, smoothne
         if (showDetailedResults) {
             results.forEach(r => console.log(`Found ${r.count} records in ${r.request_time_secs} sec `))
         }
-        console.log(`host: ${host}, table: ${table_name}, operation: ${operation}, polygons: ${cx*cy} (${cx}x${cy}), vertices: ${vertices}, records: ${cntRecords}, cycles: ${results.length}, min: ${minRespTime}s, avg:${avgRespTime}s, max:${maxRespTime}s` );
+        console.log(`host: ${host}, table: ${dataset_name}, operation: ${operation}, polygons: ${cx*cy} (${cx}x${cy}), vertices: ${vertices}, records: ${cntRecords}, cycles: ${results.length}, min: ${minRespTime}s, avg:${avgRespTime}s, max:${maxRespTime}s` );
     })
     .catch((error)=> {
         console.error(error );
@@ -79,4 +81,4 @@ const runTest = (cycles, x, y, cx, cy, dx, dy, sides, vertices, radius, smoothne
     })
 }
 
-runTest(cycles, x, y, cx, cy, dx, dy, sides, vertices, radius, smoothness)
+runTest(dataset, column, operation, cycles, x, y, cx, cy, dx, dy, sides, vertices, radius, smoothness)
