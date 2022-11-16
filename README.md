@@ -9,7 +9,7 @@ node kdb-test.js [options]
 **Options**:\
 Use these options to describe the geometry used to filter the dataset
 
-- **host**: ip addressand port of the gpudb host (default = 10.48.17.68:9191)
+- **host**: ip addressand port of the gpudb host
 - **showGeometry**: true to output wkt to console (default = false)
 - **showDetailedResults**: true to include individual test results in output (default = false)
 - **cycles**: number of test cycles to execute in the series (default = 1)

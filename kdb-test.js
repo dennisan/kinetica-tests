@@ -22,7 +22,7 @@ var password = process.env['KDB_PASS']
 
 // see args below for usage
 const {
-    host="10.48.17.68:9191",    // gpudb host
+    host,                       // gpudb host (Required)
     showGeometry=false,         // output wkt to console
     showDetailedResults=false,  // include individual test results in output
     cycles = 1,                 // number of test cycles to execute
