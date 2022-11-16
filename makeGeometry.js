@@ -1,10 +1,14 @@
 const { exit } = require("process")
 
-
+// Convert degrees to radians
 const toRads = (degrees) => degrees * Math.PI /180
 
+// Get a random number between n and 3n
 const randSpread = (spread) => Math.random() * (2 * spread) + spread
 
+// Create a star-shaped polygon centered a x,y with the specified number of vertices
+// use sides to control the rough shape of the polygon
+// use radius and smoothness to control the length and variability of each line segment
 const makePolygon = function(x, y, sides=4, vertices, radius, smoothness=0) {
     verts = []
     const delta = 360 / vertices  // angle between vertices
@@ -23,6 +27,7 @@ const makePolygon = function(x, y, sides=4, vertices, radius, smoothness=0) {
     return verts
 }
 
+// Create a (cx,cy) sized matrix of polygons centered at x,y with distance dx,dy between each polygon
 const makeMultiPolygon = function(x, y, cx, cy, dx, dy, sides, vertices, radius, smoothness=0) {
     polys = []
 
