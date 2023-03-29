@@ -22,7 +22,7 @@ var password = process.env['KDB_PASS']
 
 // see args below for usage
 const {
-    host,                               // gpudb host (Required)
+    host='10.48.17.68:9191',            // gpudb host (Required)
     dataset='prism.pipeline_view',      // table to filter
     column='WKT',                       // column in table that contains geometry
     operation='ST_INTERSECTS',          // operation to perform
@@ -72,7 +72,7 @@ const runTest = (dataset, column, operation, cycles, x, y, cx, cy, dx, dy, sides
         if (showDetailedResults) {
             results.forEach(r => console.log(`Found ${r.count} records in ${r.request_time_secs} sec `))
         }
-        console.log(`host: ${host}, table: ${dataset_name}, operation: ${operation}, polygons: ${cx*cy} (${cx}x${cy}), vertices: ${vertices}, radius: ${radius}, records found: ${cntRecords}, cycles: ${results.length}, min: ${minRespTime}s, avg:${avgRespTime}s, max:${maxRespTime}s` );
+        console.log(`host: ${host}, table: ${dataset_name}, operation: ${operation}, polygons: ${cx*cy} (${cx}x${cy}), dx: ${dx}, dy: ${dy}, vertices: ${vertices}, radius: ${radius}, records found: ${cntRecords}, cycles: ${results.length}, min: ${minRespTime}s, avg:${avgRespTime}s, max:${maxRespTime}s` );
     })
     .catch((error)=> {
         console.error(error );

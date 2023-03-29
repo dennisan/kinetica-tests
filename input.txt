@@ -1,0 +1,7 @@
+host=10.48.17.68:9191 dataset=prism.ea_parcels column=geometry operation=ST_CONTAINS cx=4 cy=4 dx=.25 dy=.25 vertices=100 radius=.1
+host=10.48.17.68:9191 dataset=prism.ea_parcels column=geometry operation=ST_CONTAINS cx=4 cy=4 dx=.5 dy=.5 vertices=100 radius=.1
+host=10.48.17.68:9191 dataset=prism.ea_parcels column=geometry operation=ST_CONTAINS cx=4 cy=4 dx=1 dy=1 vertices=100 radius=.1
+host=10.48.17.68:9191 dataset=prism.ea_parcels column=geometry operation=ST_CONTAINS cx=4 cy=4 dx=1.5 dy=1.5 vertices=100 radius=.25
+host=10.48.17.68:9191 dataset=prism.ea_parcels column=geometry operation=ST_CONTAINS cx=4 cy=4 dx=2 dy=2 vertices=100 radius=.25
+host=10.48.17.68:9191 dataset=prism.ea_parcels column=geometry operation=ST_CONTAINS cx=4 cy=4 dx=2.5 dy=2.5 vertices=100 radius=.25
+host=10.48.17.68:9191 dataset=prism.ea_parcels column=geometry operation=ST_CONTAINS cx=4 cy=4 dx=3.75 dy=3.75 vertices=100 radius=.25
